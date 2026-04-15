@@ -16,6 +16,12 @@
         <section class="controls">
             <form id="movieForm">
                 <div class="field">
+                    <label for="genreSelect">Genre</label>
+                    <select id="genreSelect" name="genre">
+                        <option value="">Alla genrer</option>
+                    </select>
+                </div>
+                <div class="field">
                     <label for="yearInput">År</label>
                     <input type="number" id="yearInput" name="year" min="1900" max="2026" placeholder="Ex: 2016">
                 </div>
@@ -23,10 +29,14 @@
             </form>
         </section>
 
+        <section class="status-area">
+            <p id="statusMessage" aria-live="polite"></p>
+        </section>
+
         <section class="result-area">
             <article id="movieCard" class="movie-card" hidden>
                 <img id="moviePoster" src="" alt="Movie Poster"/>
-                <div class="movie-information">
+                <div class="movie-info">
                     <h2 id="movieTitle"></h2>
                     <p id="movieMeta"></p>
                     <p id="movieOverview"></p>
