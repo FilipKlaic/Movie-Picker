@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Movie Night Picker</title>
+</head>
+<body>
+    <main class="app">
+        <header class="app-header">
+            <h1>Movie Night Picker</h1>
+            <p>Välj genre och eller år så slumpar vi en film åt dig!</p>
+        </header>
+
+        <section class="controls">
+            <form id="movieForm">
+                <div class="field">
+                    <label for="yearInput">År</label>
+                    <input type="number" id="yearInput" name="year" min="1900" max="2026" placeholder="Ex: 2016">
+                </div>
+                <button type="submit" id="pickBtn">Hitta film</button>
+            </form>
+        </section>
+
+        <section class="result-area">
+            <article id="movieCard" class="movie-card" hidden>
+                <img id="moviePoster" src="" alt="Movie Poster"/>
+                <div class="movie-information">
+                    <h2 id="movieTitle"></h2>
+                    <p id="movieMeta"></p>
+                    <p id="movieOverview"></p>
+                    <button id="rerollBtn" type="button">Slumpa ny film</button>
+                </div>
+            </article>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

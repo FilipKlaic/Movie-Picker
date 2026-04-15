@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Syne:wght@600;700&display=swap");
+
+:root {
+  --bg: #f2efe6;
+  --bg-soft: #e8e2d2;
+  --surface: #fffdf8;
+  --ink: #1f1f22;
+  --muted: #5f5b55;
+  --accent: #c85f36;
+  --accent-dark: #a74925;
+  --ring: #2f7f79;
+  --radius: 18px;
+  --shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Manrope", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% 10%, #fff3d9 0%, transparent 35%),
+    radial-gradient(circle at 90% 20%, #d9efe8 0%, transparent 30%),
+    linear-gradient(160deg, var(--bg) 0%, var(--bg-soft) 100%);
+  padding: 24px;
+}
+
+.app {
+  max-width: 980px;
+  margin: 0 auto;
+  background: var(--surface);
+  border-radius: calc(var(--radius) + 4px);
+  box-shadow: var(--shadow);
+  padding: 28px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.app-header h1 {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.app-header p {
+  color: var(--muted);
+  max-width: 60ch;
+  margin-bottom: 24px;
+}
+
+#movieForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 14px;
+  align-items: end;
+  margin-bottom: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+label {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+select,
+input,
+button {
+  font: inherit;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  padding: 12px 14px;
+  background: #fff;
+  color: var(--ink);
+}
+
+select:focus,
+input:focus,
+button:focus {
+  outline: 3px solid color-mix(in srgb, var(--ring) 40%, transparent);
+  outline-offset: 2px;
+  border-color: var(--ring);
+}
+
+#pickBtn,
+#rerollBtn {
+  cursor: pointer;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  transition: transform 0.12s ease, background 0.2s ease;
+}
+
+#pickBtn:hover,
+#rerollBtn:hover {
+  transform: translateY(-1px);
+  background: var(--accent-dark);
+}
+
+#pickBtn:active,
+#rerollBtn:active {
+  transform: translateY(0);
+}
+
+.status-area {
+  min-height: 28px;
+  margin-bottom: 8px;
+}
+
+#statusMessage {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.movie-card {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 20px;
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  animation: cardIn 300ms ease;
+}
+
+#moviePoster {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 14px;
+  background: #ebe6dc;
+}
+
+.movie-info h2 {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  margin-bottom: 8px;
+}
+
+#movieMeta {
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+#movieOverview {
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+#rerollBtn {
+  width: fit-content;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 800px) {
+  #movieForm {
+    grid-template-columns: 1fr;
+  }
+
+  .movie-card {
+    grid-template-columns: 1fr;
+  }
+
+  #moviePoster {
+    max-width: 280px;
+  }
+}
