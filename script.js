@@ -19,7 +19,8 @@ let lastFilters = {genre: "", year: ""};
 
 function setStatus(message, isError = false) {
     statusMessage.textContent = message;
-    statusMessage.style.color = isError ? "red" : "green";
+  statusMessage.classList.toggle("is-error", isError);
+  statusMessage.classList.toggle("is-success", !isError && Boolean(message));
 }
 
 function randomItem(arr) {

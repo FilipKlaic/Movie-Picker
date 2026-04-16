@@ -1,16 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Syne:wght@600;700&display=swap");
 
 :root {
-  --bg: #f2efe6;
-  --bg-soft: #e8e2d2;
-  --surface: #fffdf8;
-  --ink: #1f1f22;
-  --muted: #5f5b55;
-  --accent: #c85f36;
-  --accent-dark: #a74925;
-  --ring: #2f7f79;
-  --radius: 18px;
-  --shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  --bg: #131f2f;
+  --bg-soft: #1b2a3e;
+  --surface: #1a2739;
+  --surface-2: #273445;
+  --ink: #eef2f7;
+  --muted: #8f99a6;
+  --accent: #b78654;
+  --accent-2: #717882;
+  --accent-dark: #633e19;
+  --ring: #b78654;
+  --ok: #49c980;
+  --error: #ff6b76;
+  --radius: 20px;
+  --shadow: 0 26px 60px rgba(6, 10, 18, 0.62);
 }
 
 * {
@@ -24,34 +28,50 @@ body {
   font-family: "Manrope", sans-serif;
   color: var(--ink);
   background:
-    radial-gradient(circle at 10% 10%, #fff3d9 0%, transparent 35%),
-    radial-gradient(circle at 90% 20%, #d9efe8 0%, transparent 30%),
-    linear-gradient(160deg, var(--bg) 0%, var(--bg-soft) 100%);
+    radial-gradient(circle at 12% 10%, rgba(183, 134, 84, 0.18) 0%, transparent 36%),
+    radial-gradient(circle at 86% 0%, rgba(113, 120, 130, 0.2) 0%, transparent 32%),
+    linear-gradient(155deg, var(--bg) 0%, var(--bg-soft) 100%);
   padding: 24px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(circle at 50% 20%, #000 0%, transparent 80%);
 }
 
 .app {
   max-width: 980px;
   margin: 0 auto;
-  background: var(--surface);
+  background: linear-gradient(175deg, rgba(255, 255, 255, 0.02), transparent 28%), var(--surface);
   border-radius: calc(var(--radius) + 4px);
   box-shadow: var(--shadow);
-  padding: 28px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 34px;
+  border: 1px solid rgba(143, 153, 166, 0.28);
+  backdrop-filter: blur(8px);
+  animation: riseIn 420ms ease;
 }
 
 .app-header h1 {
   font-family: "Syne", sans-serif;
   font-size: clamp(2rem, 5vw, 3rem);
   line-height: 1.05;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   margin-bottom: 10px;
+  text-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .app-header p {
   color: var(--muted);
   max-width: 60ch;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
 }
 
 #movieForm {
@@ -78,10 +98,20 @@ input,
 button {
   font: inherit;
   border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(143, 153, 166, 0.42);
   padding: 12px 14px;
-  background: #fff;
+  background: var(--surface-2);
   color: var(--ink);
+}
+
+select,
+input {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+select:hover,
+input:hover {
+  border-color: rgba(183, 134, 84, 0.6);
 }
 
 select:focus,
@@ -92,20 +122,26 @@ button:focus {
   border-color: var(--ring);
 }
 
+input::placeholder {
+  color: color-mix(in srgb, var(--muted) 88%, #fff 12%);
+}
+
 #pickBtn,
 #rerollBtn {
   cursor: pointer;
   border: none;
-  background: var(--accent);
-  color: #fff;
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  color: #1a1d26;
   font-weight: 700;
-  transition: transform 0.12s ease, background 0.2s ease;
+  box-shadow: 0 8px 20px rgba(99, 62, 25, 0.34);
+  transition: transform 0.14s ease, filter 0.2s ease, box-shadow 0.2s ease;
 }
 
 #pickBtn:hover,
 #rerollBtn:hover {
   transform: translateY(-1px);
-  background: var(--accent-dark);
+  filter: brightness(1.06);
+  box-shadow: 0 12px 26px rgba(99, 62, 25, 0.44);
 }
 
 #pickBtn:active,
@@ -121,16 +157,25 @@ button:focus {
 #statusMessage {
   color: var(--muted);
   font-size: 0.95rem;
+  font-weight: 600;
+}
+
+#statusMessage.is-success {
+  color: var(--ok);
+}
+
+#statusMessage.is-error {
+  color: var(--error);
 }
 
 .movie-card {
   display: grid;
   grid-template-columns: 240px 1fr;
   gap: 20px;
-  background: #fff;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 24%), var(--surface-2);
   border-radius: var(--radius);
   padding: 18px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(143, 153, 166, 0.32);
   animation: cardIn 300ms ease;
 }
 
@@ -139,7 +184,8 @@ button:focus {
   aspect-ratio: 2 / 3;
   object-fit: cover;
   border-radius: 14px;
-  background: #ebe6dc;
+  background: #1f2b3c;
+  border: 1px solid rgba(143, 153, 166, 0.24);
 }
 
 .movie-info h2 {
@@ -163,6 +209,17 @@ button:focus {
   width: fit-content;
 }
 
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes cardIn {
   from {
     opacity: 0;
@@ -175,6 +232,14 @@ button:focus {
 }
 
 @media (max-width: 800px) {
+  body {
+    padding: 16px;
+  }
+
+  .app {
+    padding: 20px;
+  }
+
   #movieForm {
     grid-template-columns: 1fr;
   }
@@ -187,5 +252,3 @@ button:focus {
     max-width: 280px;
   }
 }
-
-/* 123 */
