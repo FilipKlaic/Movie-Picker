@@ -25,6 +25,21 @@
                     <label for="yearInput">År</label>
                     <input type="number" id="yearInput" name="year" min="1900" max="2026" placeholder="Ex: 2016">
                 </div>
+                <div class="field">
+                    <div class="range-header">
+                        <label for="ratingInput">Minst betyg</label>
+                        <span id="ratingValue">0.0+</span>
+                    </div>
+                    <input type="range" id="ratingInput" name="rating" min="0" max="10" step="0.5" value="0">
+                </div>
+                <div class="field">
+                    <label for="qualityMode">Kvalitetsläge</label>
+                    <select id="qualityMode" name="qualityMode">
+                        <option value="balanced">Balanserad</option>
+                        <option value="popular">Populära favoriter</option>
+                        <option value="hidden">Hidden gems</option>
+                    </select>
+                </div>
                 <button type="submit" id="pickBtn">Hitta film</button>
             </form>
         </section>
@@ -40,12 +55,22 @@
                     <h2 id="movieTitle"></h2>
                     <p id="movieMeta"></p>
                     <p id="movieOverview"></p>
-                    <button id="rerollBtn" type="button">Slumpa ny film</button>
+                    <section class="providers" aria-live="polite">
+                        <p class="providers-title">Var kan jag se den?</p>
+                        <p id="providerMessage">Laddar streamingtjänster...</p>
+                        <div id="providerList" class="provider-list"></div>
+                        <a id="providerLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Se alla alternativ</a>
+                    </section>
+                    <div class="movie-actions">
+                        <button id="rerollBtn" type="button">Slumpa ny film</button>
+                        <button id="seenBtn" type="button">Visa inte igen</button>
+                        <a id="trailerLink" href="#" target="_blank" rel="noopener noreferrer">Se trailer</a>
+                    </div>
                 </div>
             </article>
         </section>
     </main>
     <script src="config.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
